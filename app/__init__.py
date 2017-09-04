@@ -4,7 +4,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.pymongo import PyMongo
 from flask.ext.login import LoginManager
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path = '/static')
 
 app.config.from_object('app.configuration.DevelopmentConfig')
 

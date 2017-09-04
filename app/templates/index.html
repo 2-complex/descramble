@@ -4,4 +4,57 @@
 
 <h1>Descramble</h1>
 
+<script>
+
+$('#body_container').append(
+    $('<div>').append(
+        $('<textarea>')
+            .attr('id', 'input')
+            .addClass('form-control')
+            .attr('name', 'letters')
+            .attr('tabindex', 1)
+    ),
+    $('<div>').append(
+        $('<button>')
+            .html('SOLVE')
+            .addClass('solve-button')
+            .attr('tabindex', 2 )
+            .click(
+                function(e)
+                {
+                    $('#output').empty();
+
+                    $.when( $.ajax({
+                        type: "POST",
+                        url: "/solve",
+                        dataType: "text",
+                        data: {"letters":$('#input')[0].value},
+                    }) ).then(
+                        function(result)
+                        {
+                            var wordInfos = JSON.parse(result);
+                            debugger
+                            for( var i = 0; i < wordInfos.length; ++i )
+                            {
+                                $('#output').append(
+                                    $('<div>')
+                                        .attr('id', 'output')
+                                        .addClass('form-control')
+                                        .html(wordInfos[i].word)
+                                )
+                            }
+                        }
+                    );
+                }
+            ),
+        $('<div>')
+            .attr('id', 'output')
+            .addClass('form-control')
+            .attr('name', 'words')
+            .attr('tabindex', 3)
+    )
+)
+
+</script>
+
 {%endblock%}
