@@ -53,7 +53,7 @@ def results(hand):
 
 def json_list(hand):
     l = []
-    for letter, word in results(hand):
+    for letter, word in results(hand.lower()):
         if len(letter) > 0:
             l.append({'letter':letter, 'word':word})
         else:

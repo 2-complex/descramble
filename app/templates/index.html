@@ -7,23 +7,24 @@
 <script>
 
 $('#body_container').append(
-    $('<div>').append(
+    $('<div>')
+        .addClass('container')
+        .append(
         $('<textarea>')
             .attr('id', 'input')
-            .addClass('form-control')
+            .addClass('form-input')
             .attr('name', 'letters')
             .attr('tabindex', 1)
     ),
     $('<div>').append(
         $('<button>')
-            .html('SOLVE')
+            .text('SOLVE')
             .addClass('solve-button')
             .attr('tabindex', 2 )
             .click(
                 function(e)
                 {
                     $('#output').empty();
-
                     $.when( $.ajax({
                         type: "POST",
                         url: "/solve",
@@ -33,14 +34,13 @@ $('#body_container').append(
                         function(result)
                         {
                             var wordInfos = JSON.parse(result);
-                            debugger
                             for( var i = 0; i < wordInfos.length; ++i )
                             {
                                 $('#output').append(
                                     $('<div>')
                                         .attr('id', 'output')
                                         .addClass('form-control')
-                                        .html(wordInfos[i].word)
+                                        .text(wordInfos[i].word)
                                 )
                             }
                         }
@@ -49,7 +49,7 @@ $('#body_container').append(
             ),
         $('<div>')
             .attr('id', 'output')
-            .addClass('form-control')
+            .addClass('output-text')
             .attr('name', 'words')
             .attr('tabindex', 3)
     )
