@@ -26,13 +26,23 @@ $('#solve-button').click(
             function(result)
             {
                 var wordInfos = JSON.parse(result);
-                for( var i = 0; i < wordInfos.length; ++i )
+
+                for( var letter in wordInfos )
                 {
-                    $("#output").append(
-                        $("<div>")
-                            .addClass("output-text")
-                            .text(wordInfos[i].word)
-                    )
+                    var wordList = wordInfos[letter];
+                    var group = $("<div>")
+                        .addClass("output-group")
+                        .append( $("<div>").addClass("output-group-letter").text(letter) )
+                    $("#output").append(group);
+
+                    for( var i = 0; i < wordList.length; ++i )
+                    {
+                        group.append(
+                            $("<div>")
+                                .addClass("output-text")
+                                .text(wordList[i])
+                        )
+                    }
                 }
             }
         );

@@ -52,12 +52,10 @@ def results(hand):
 
 
 def json_list(hand):
-    l = []
+    letter_to_wordlist = {}
     for letter, word in results(hand.lower()):
-        if len(letter) > 0:
-            l.append({'letter':letter, 'word':word})
-        else:
-            l.append({'word':word})
-
-    return json.dumps(l)
+        l = letter_to_wordlist.get(letter, [])
+        l.append(word)
+        letter_to_wordlist[letter] = l
+    return json.dumps(letter_to_wordlist)
 
