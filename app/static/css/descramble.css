@@ -3,7 +3,7 @@ body {
     background-color: #fff;
 }
 
-.container {
+#container {
     display:inline-block;
     position: absolute;
     top:0;
@@ -11,6 +11,31 @@ body {
     left:0;
     right:0;
 }
+
+#masthead {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    height: 50px;
+    left: 0;
+    right: 0;
+}
+
+#masthead h1 {
+    margin: 0;
+    border: 0;
+    color: #fff;
+}
+
+#mastbody {
+    display: inline-block;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 
 #body_container {
     background-color: #104;
@@ -20,6 +45,16 @@ body {
     bottom:0;
     left:0;
     right:0;
+}
+
+#output {
+    display: inline-block;
+    position: absolute;
+    background-color: black;
+    top: 100px;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 textarea.form-input {
@@ -43,9 +78,12 @@ textarea.form-input {
     text-transform: uppercase;
 }
 
-.solve-button {
+#solve-button {
     display: inline-block;
     position: absolute;
+
+    top: 5em;
+    left: .5em;
     width: 20em;
     height: 3em;
 
@@ -60,6 +98,7 @@ textarea.form-input {
 .output-text {
     display: inline-block;
     background-color: #000;
+    margin-right: .5em;
     color: #fff;
     text-transform: uppercase;
 }

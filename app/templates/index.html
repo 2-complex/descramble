@@ -2,59 +2,42 @@
 {%block title%}{%endblock%}
 {%block main_content%}
 
-<h1>Descramble</h1>
+<div id="masthead">
+    <h1>Descramble</h1>
+</div>
+<div id="mastbody">
+    <div id="container">
+        <textarea id="input" class="form-input" tabIndex=1></textarea>
+    </div>
+    <div>
+        <button id="solve-button" tabIndex=2>SOLVE</button>
+    </div>
+    <div id="output" class="output-text" tabIndex=3></div>
+</div>
 
 <script>
-
-$('#body_container').append(
-    $('<div>')
-        .addClass('container')
-        .append(
-        $('<textarea>')
-            .attr('id', 'input')
-            .addClass('form-input')
-            .attr('name', 'letters')
-            .attr('tabindex', 1)
-    ),
-    $('<div>').append(
-        $('<button>')
-            .text('SOLVE')
-            .addClass('solve-button')
-            .attr('tabindex', 2 )
-            .click(
-                function(e)
+$('#solve-button').click(
+    function(evt)
+    {
+        $('#output').empty();
+        $.when( $.ajax({ type: "POST", url: "/solve", dataType: "text",
+            data: {"letters":$("#input").val()},
+        }) ).then(
+            function(result)
+            {
+                var wordInfos = JSON.parse(result);
+                for( var i = 0; i < wordInfos.length; ++i )
                 {
-                    $('#output').empty();
-                    $.when( $.ajax({
-                        type: "POST",
-                        url: "/solve",
-                        dataType: "text",
-                        data: {"letters":$('#input')[0].value},
-                    }) ).then(
-                        function(result)
-                        {
-                            var wordInfos = JSON.parse(result);
-                            for( var i = 0; i < wordInfos.length; ++i )
-                            {
-                                $('#output').append(
-                                    $('<div>')
-                                        .attr('id', 'output')
-                                        .addClass('form-control')
-                                        .text(wordInfos[i].word)
-                                )
-                            }
-                        }
-                    );
+                    $("#output").append(
+                        $("<div>")
+                            .addClass("output-text")
+                            .text(wordInfos[i].word)
+                    )
                 }
-            ),
-        $('<div>')
-            .attr('id', 'output')
-            .addClass('output-text')
-            .attr('name', 'words')
-            .attr('tabindex', 3)
-    )
+            }
+        );
+    }
 )
-
 </script>
 
 {%endblock%}
