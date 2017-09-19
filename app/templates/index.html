@@ -36,17 +36,17 @@ $('#solve-button').click(
 
                 letterListPairs.sort( function(a,b) {return a.letter < b.letter ? -1 : 1} );
 
-                for( var i=0; i < letterListPairs.length; ++i )
+                for( var j=0; j < letterListPairs.length; ++j )
                 {
-                    var letter = letterListPairs[i].letter;
-                    var wordList = letterListPairs[i].wordList;
+                    var letter = letterListPairs[j].letter;
+                    var wordList = letterListPairs[j].wordList;
 
                     var group = $("<div>")
                         .addClass("output-group")
                         .append( $("<div>").addClass("output-group-letter").text(letter) )
                     $("#output").append(group);
 
-                    for( var i = 0; i < wordList.length; ++i )
+                    for( var i=0; i < wordList.length; ++i )
                     {
                         group.append(
                             $("<div>")
