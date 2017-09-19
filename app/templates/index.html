@@ -27,9 +27,20 @@ $('#solve-button').click(
             {
                 var wordInfos = JSON.parse(result);
 
+                var letterListPairs = [];
                 for( var letter in wordInfos )
                 {
                     var wordList = wordInfos[letter];
+                    letterListPairs.push( {letter:letter, wordList:wordList } );
+                }
+
+                letterListPairs.sort( function(a,b) {return a.letter < b.letter ? -1 : 1} );
+
+                for( var i=0; i < letterListPairs.length; ++i )
+                {
+                    var letter = letterListPairs[i].letter;
+                    var wordList = letterListPairs[i].wordList;
+
                     var group = $("<div>")
                         .addClass("output-group")
                         .append( $("<div>").addClass("output-group-letter").text(letter) )
